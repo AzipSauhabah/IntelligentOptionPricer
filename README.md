@@ -1,4 +1,4 @@
-# Pricer d’Options sur Indice (S&P 500) – Projet de Recrutement
+# Pricer d’Options sur Indice (S&P 500)
 
 ## Objectif
 🔥 **Objectif :** Évaluer la capacité du candidat à développer un pricer d’options européennes sur indice action (ex: S&P 500) en combinant plusieurs techniques avancées de finance quantitative et de programmation Python.
@@ -8,7 +8,7 @@
 
 ## Objectifs Techniques
 🚀 **Le projet doit démontrer la maîtrise des points suivants :**
-- ✔️ Structuration et modularité du code (POO, gestion des erreurs, documentation)
+- ✔️ Structuration et modularité du code (POO, gestion des erreurs, documentation, découpage des fichiers source)
 - ✔️ Implémentation optimisée des modèles de pricing (Black-Scholes, Monte Carlo, Arbre Binomial)
 - ✔️ Optimisation numérique (générateurs lazy, parallélisation, réduction de variance)
 - ✔️ Récupération et interpolation des données de marché (Spot, Volatilité implicite, Courbe de taux)
@@ -21,10 +21,11 @@
 ## 1. Implémentation des Modèles de Pricing
 ### 1.1 Black-Scholes (formule fermée)
 - Implémentation sans bibliothèque spécialisée
-- Gestion du taux de dividende
+- Dividende constant ou selon le modèle de Buhler
 - Version vectorisée pour efficacité
 
 ### 1.2 Monte Carlo avec Optimisations
+- Implémentation sans bibliothèque spécialisée
 - Génération lazy (yield)
 - Variables antithétiques, réduction de variance
 - Matrice aléatoire pour approximer les Greeks
@@ -32,8 +33,9 @@
 - Benchmark du temps de calcul
 
 ### 1.3 Arbre Binomial (Cox-Ross-Rubinstein)
+- Implémentation sans bibliothèque spécialisée
 - Implémentation récursive et vectorisée
-- Gestion des dividendes continus
+- Gestion des dividendes continus ou non selon votre choix
 - Comparaison en précision et vitesse
 
 ## 2. Récupération des Données de Marché et Construction de la Courbe de Taux
@@ -42,12 +44,13 @@
 - Surface de volatilité implicite et interpolation bicubique
 
 ### 2.2 Construction de la Courbe de Taux sans Risque
-- Récupération des taux US Treasury Bonds via API
+- Récupération des taux US Treasury Bonds via yahoo finance ou google finance ou autre de votre choix.
 - Interpolation spline cubique des taux zéro-coupon
-- Implémentation avec QuantLib pour une courbe de discounting
+- Implémentation avec QuantLib par exemple pour une courbe de discounting
 
 ## 3. Implémentation d’un Réseau de Neurones pour le Pricing
 ### 3.1 Données d’entraînement
+- utilisation de Keras ou Tensorflow ou pyTorch
 - Entrées : (S0, K, r, σ, T, q)
 - Sortie : Prix de l’option
 - Dataset : 100 000 échantillons minimum
@@ -102,6 +105,7 @@
 - 🔹 Le code doit être publié sur GitHub et bien documenté
 - 🔹 Le projet doit être réalisé en autonomie sur un week-end
 - 🔹 Un rapport explicatif détaillé est demandé
+- 🔹 aucune variable de marché en dur dans le code. elles viennent toutes des données de marché sur le net ou que le candidat a préalablement enregistré dans une base de donnée:  mySql, MongoDB ou dans un fichier.
 
 ⚠ **Un bon code ne suffit pas : il faut être capable d’expliquer ses choix et de comparer les méthodes.**
 
