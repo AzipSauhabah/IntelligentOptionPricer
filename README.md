@@ -1,112 +1,116 @@
-# Pricer d’Options sur Indice (S&P 500)
+# Options Pricer for Index (S&P 500) in Python
 
-## Objectif
-🔥 **Objectif :** Évaluer la capacité du candidat à développer un pricer d’options européennes sur indice action (ex: S&P 500) en combinant plusieurs techniques avancées de finance quantitative et de programmation Python.
+## Objective
+🔥 **Objective:** Evaluate the candidate's ability to develop a European options pricer for stock indices (e.g., S&P 500) by combining several advanced techniques in quantitative finance and Python programming.
 
-## Durée du projet
-📅 **Durée du projet :** 1 week-end
+## Project Duration
+📅 **Project Duration:** 1 weekend
 
-## Objectifs Techniques
-🚀 **Le projet doit démontrer la maîtrise des points suivants :**
-- ✔️ Structuration et modularité du code (POO, gestion des erreurs, documentation, découpage des fichiers source)
-- ✔️ Implémentation optimisée des modèles de pricing (Black-Scholes, Monte Carlo, Arbre Binomial)
-- ✔️ Optimisation numérique (générateurs lazy, parallélisation, réduction de variance)
-- ✔️ Récupération et interpolation des données de marché (Spot, Volatilité implicite, Courbe de taux)
-- ✔️ Approximation du pricing par Machine Learning (réseau de neurones)
-- ✔️ Comparaison des méthodes en précision et temps de calcul
-- ✔️ Bonne gestion du projet avec Git et GitHub (structuration des commits, branches, PR)
+## Technical Objectives
+🚀 **The project should demonstrate mastery of the following points:**
+- ✔️ Code structuring and modularity (OOP, error handling, documentation, source file organization)
+- ✔️ Optimized implementation of pricing models (Black-Scholes, Monte Carlo, Binomial Tree)
+- ✔️ Numerical optimization (lazy generators, parallelization, variance reduction)
+- ✔️ Retrieval and interpolation of market data (Spot, Implied Volatility, Yield Curve)
+- ✔️ Pricing approximation using Machine Learning (neural network)
+- ✔️ Comparison of methods in terms of accuracy and computation time
+- ✔️ Good project management with Git and GitHub (commit structure, branches, PR)
 
-⚠ **Ce projet est conçu pour être difficile afin que seul un candidat avec un solide bagage en finance quantitative et en programmation puisse le réussir.**
+⚠ **This project is designed to be challenging so that only candidates with a solid background in quantitative finance and programming can succeed.**
 
-## 1. Implémentation des Modèles de Pricing
-### 1.1 Black-Scholes (formule fermée)
-- Implémentation sans bibliothèque spécialisée
-- Dividende constant ou selon le modèle de Buhler
-- Version vectorisée pour efficacité
+## 1. Implementation of Pricing Models
+### 1.1 Black-Scholes (Closed-form Formula)
+- Implementation without specialized libraries
+- Constant dividend or according to the Buhler model
+- Vectorized version for efficiency
 
-### 1.2 Monte Carlo avec Optimisations
-- Implémentation sans bibliothèque spécialisée
-- Génération lazy (yield)
-- Variables antithétiques, réduction de variance
-- Matrice aléatoire pour approximer les Greeks
-- Parallélisation (multiprocessing, concurrent.futures)
-- Benchmark du temps de calcul
+### 1.2 Monte Carlo with Optimizations
+- Implementation without specialized libraries
+- Lazy generation (yield)
+- Antithetic variables, variance reduction
+- Random matrix to approximate Greeks
+- Parallelization (multiprocessing, concurrent.futures)
+- Benchmarking of computation time
 
-### 1.3 Arbre Binomial (Cox-Ross-Rubinstein)
-- Implémentation sans bibliothèque spécialisée
-- Implémentation récursive et vectorisée
-- Gestion des dividendes continus ou non selon votre choix
-- Comparaison en précision et vitesse
+### 1.3 Binomial Tree (Cox-Ross-Rubinstein)
+- Implementation without specialized libraries
+- Recursive and vectorized implementation
+- Management of continuous or discrete dividends based on your choice
+- Comparison in terms of accuracy and speed
 
-## 2. Récupération des Données de Marché et Construction de la Courbe de Taux
-### 2.1 Récupération du Spot et de la Volatilité
-- Spot (S0) récupéré via API (yfinance, Alpha Vantage, etc.)
-- Surface de volatilité implicite et interpolation bicubique
+## 2. Retrieval of Market Data and Construction of the Risk-Free Rate Curve
+### 2.1 Retrieval of Spot and Volatility
+- Spot (S0) retrieved via API (yfinance, Alpha Vantage, etc.)
+- Implied volatility surface and bicubic interpolation
 
-### 2.2 Construction de la Courbe de Taux sans Risque
-- Récupération des taux US Treasury Bonds via yahoo finance ou google finance ou autre de votre choix.
-- Interpolation spline cubique des taux zéro-coupon
-- Implémentation avec QuantLib par exemple pour une courbe de discounting
+### 2.2 Construction of the Risk-Free Rate Curve
+- Retrieval of US Treasury Bond rates via Yahoo Finance, Google Finance, or another source of your choice.
+- Cubic spline interpolation of zero-coupon rates
+- Implementation with QuantLib, for example, for a discounting curve
 
-## 3. Implémentation d’un Réseau de Neurones pour le Pricing
-### 3.1 Données d’entraînement
-- utilisation de Keras ou Tensorflow ou pyTorch
-- Entrées : (S0, K, r, σ, T, q)
-- Sortie : Prix de l’option
-- Dataset : 100 000 échantillons minimum
-- Évaluation : RMSE entre ML et modèles analytiques
+## 3. Implementation of a Neural Network for Pricing
+### 3.1 Training Data
+- Use of Keras, TensorFlow, or PyTorch
+- Inputs: (S0, K, r, σ, T, q)
+- Output: Option price
+- Dataset: Minimum of 100,000 samples
+- Evaluation: RMSE between ML and analytical models
 
-### 3.2 Architecture du Réseau
-- MLP avec activation ReLU
-- Optimisation Adam avec scheduler
-- Comparaison des performances
+### 3.2 Network Architecture
+- MLP with ReLU activation
+- Adam optimization with scheduler
+- Performance comparison
 
-## 4. Comparaison des Méthodes
-| Méthode | Prix Option | Temps de Calcul (ms) | Erreur (%) |
-|---------|-------------|----------------------|------------|
+## 4. Comparison of Methods
+| Method | Option Price | Computation Time (ms) | Error (%) |
+|--------|--------------|-----------------------|-----------|
 | Black-Scholes | 250.23 | 0.5 | 0.00% |
-| Monte Carlo (1000 scénarios) | 249.80 | 120 | -0.17% |
-| Monte Carlo (10000 scénarios) | 250.15 | 950 | -0.03% |
-| Arbre Binomial (100 étapes) | 250.30 | 30 | +0.03% |
-| Réseau de Neurones | 250.10 | 1.2 | -0.05% |
+| Monte Carlo (1000 scenarios) | 249.80 | 120 | -0.17% |
+| Monte Carlo (10,000 scenarios) | 250.15 | 950 | -0.03% |
+| Binomial Tree (100 steps) | 250.30 | 30 | +0.03% |
+| Neural Network | 250.10 | 1.2 | -0.05% |
 
-## 5. Organisation du Code et Bonnes Pratiques Git
-### 5.1 Structure du Code
-- 📌 `OptionPricer/` → Interface principale
-- 📌 `MonteCarloPricer.py` → Simulation Monte Carlo optimisée
-- 📌 `BlackScholesPricer.py` → Implémentation Black-Scholes
-- 📌 `BinomialTreePricer.py` → Pricing par arbre binomial
-- 📌 `RiskFreeCurve.py` → Gestion de la courbe de taux
-- 📌 `VolatilitySurface.py` → Interpolation de la volatilité
-- 📌 `NeuralNetworkPricer.py` → Approximation ML
-- 📌 `Benchmarking.py` → Comparaison des méthodes
+## 5. Code Organization and Git Best Practices
+### 5.1 Code Structure
+- 📌 `OptionPricer/` → Main interface
+- 📌 `MonteCarloPricer.py` → Optimized Monte Carlo simulation
+- 📌 `BlackScholesPricer.py` → Black-Scholes implementation
+- 📌 `BinomialTreePricer.py` → Binomial tree pricing
+- 📌 `RiskFreeCurve.py` → Yield curve management
+- 📌 `VolatilitySurface.py` → Volatility interpolation
+- 📌 `NeuralNetworkPricer.py` → ML approximation
+- 📌 `Benchmarking.py` → Method comparison
 
-### 5.2 Exigences Git & GitHub
-- ✅ Créer un repository GitHub public (sauf si déjà existant)
-- ✅ Structurer les commits (pas de “fix bug” générique)
-- ✅ Utiliser une branche `main` et au moins une branche `feature-X`
-- ✅ Créer une Pull Request avant de fusionner `feature` dans `main`
-- ✅ Ajouter un `.gitignore` pour exclure les fichiers inutiles
-- ✅ Rédiger un README clair avec instructions d’exécution
-- ✅ Publier le projet sur GitHub avec un rapport détaillé
+### 5.2 Git & GitHub Requirements
+- ✅ Create a public GitHub repository (unless one already exists)
+- ✅ Structure commits (avoid generic “fix bug” messages)
+- ✅ Use a `main` branch and at least one `feature-X` branch
+- ✅ Create a Pull Request before merging `feature` into `main`
+- ✅ Add a `.gitignore` to exclude unnecessary files
+- ✅ Write a clear README with execution instructions
+- ✅ Publish the project on GitHub with a detailed report
 
-## 6. Critères d’Évaluation
-| Critère | Exigences |
-|---------|-----------|
-| Qualité du code | POO, documentation, structuration |
-| Performance | Vectorisation, parallélisation |
-| Précision des modèles | Comparaison rigoureuse |
-| Python avancé | POO, programmation fonctionnelle, parallélisation |
-| Machine Learning | Performance et précision |
-| Utilisation des API | Récupération des taux et volatilités |
-| Maîtrise de Git/GitHub | Structuration des commits et branches |
+## 6. Evaluation Criteria
+| Criterion | Requirements |
+|-----------|--------------|
+| Code Quality | OOP, documentation, structuring |
+| Performance | Vectorization, parallelization |
+| Model Accuracy | Rigorous comparison |
+| Advanced Python | OOP, functional programming, parallelization |
+| Machine Learning | Performance and accuracy |
+| API Usage | Retrieval of rates and volatilities |
+| Mastery of Git/GitHub | Structuring commits and branches |
 
-## 7. Consignes Finales
-- 🔹 Le code doit être publié sur GitHub et bien documenté
-- 🔹 Le projet doit être réalisé en autonomie sur un week-end
-- 🔹 Un rapport explicatif détaillé est demandé
-- 🔹 aucune variable de marché en dur dans le code. elles viennent toutes des données de marché sur le net ou que le candidat a préalablement enregistré dans une base de donnée:  mySql, MongoDB ou dans un fichier.
+## 7. Final Instructions
+- 🔹 The code must be published on GitHub and well-documented.
+- 🔹 The project should be completed independently over a weekend.
+- 🔹 A detailed explanatory report is required.
+- 🔹 No hard-coded market variables in the code; all should come from market data online or previously stored in a database: MySQL, MongoDB, or in a file.
 
-⚠ **Un bon code ne suffit pas : il faut être capable d’expliquer ses choix et de comparer les méthodes.**
+⚠ **Good code alone is not enough: you must be able to explain your choices and compare the methods.**
 
-🚀 **Bonne chance !**
+🚀 **Good luck!**
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
